@@ -1,8 +1,7 @@
-
-import { ApolloError } from 'apollo-server-express';
+import { ApolloError } from 'apollo-server-express'; // Updated import
 import User from '../models/User';
 import { signToken } from '../services/auth';
-import { JwtPayload } from '../types';
+import { JwtPayload } from '../services/auth';
 
 interface Context {
   user?: JwtPayload;
@@ -60,6 +59,7 @@ const resolvers = {
 };
 
 export default resolvers;
+
 
 
 
