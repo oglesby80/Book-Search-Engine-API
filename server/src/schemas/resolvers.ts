@@ -1,5 +1,5 @@
 
-import { gql } from 'graphql-tag';
+import { ApolloError } from 'apollo-server-express';
 import User from '../models/User';
 import { signToken } from '../services/auth';
 import { JwtPayload } from '../types';
