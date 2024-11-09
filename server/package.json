@@ -10,6 +10,7 @@
     "server:build": "tsc",
     "start": "npm run client:build && npm run server",
     "dev": "concurrently \"npm run server:build --watch\" \"cd ../client && npm start\""
+    
   },
   "keywords": [],
   "author": "",
