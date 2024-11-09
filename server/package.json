@@ -10,7 +10,6 @@
     "server:build": "tsc",
     "start": "npm run client:build && npm run server",
     "dev": "concurrently \"npm run server:build --watch\" \"cd ../client && npm start\""
-    
   },
   "keywords": [],
   "author": "",
@@ -22,6 +21,7 @@
     "concurrently": "^9.1.0",
     "express": "^4.19.2",
     "graphql": "^16.9.0",
+    "graphql-tag": "^2.12.6",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.0"
   },

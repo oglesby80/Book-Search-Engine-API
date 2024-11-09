@@ -1,7 +1,8 @@
-import { gql, AuthenticationError } from '@apollo/server';
+
+import { gql } from 'graphql-tag';
 import User from '../models/User';
 import { signToken } from '../services/auth';
-import { JwtPayload } from '../types'; // Assuming JwtPayload is a type you've defined for JWT payloads
+import { JwtPayload } from '../types';
 
 interface Context {
   user?: JwtPayload;
@@ -13,14 +14,14 @@ const resolvers = {
       if (context.user) {
         return await User.findById(context.user._id).populate('savedBooks');
       }
-      throw new AuthenticationError('Not logged in');
+      throw new ApolloError('Not logged in', 'UNAUTHENTICATED');
     },
   },
   Mutation: {
     login: async (_: unknown, { email, password }: { email: string; password: string }) => {
       const user = await User.findOne({ email });
       if (!user || !(await user.isCorrectPassword(password))) {
-        throw new AuthenticationError('Incorrect credentials');
+        throw new ApolloError('Incorrect credentials', 'UNAUTHENTICATED');
       }
       const token = signToken(user.username, user.email, user._id);
       return { token, user };
@@ -43,7 +44,7 @@ const resolvers = {
           { new: true, runValidators: true }
         );
       }
-      throw new AuthenticationError('You need to be logged in');
+      throw new ApolloError('You need to be logged in', 'UNAUTHENTICATED');
     },
     removeBook: async (_: unknown, { bookId }: { bookId: string }, context: Context) => {
       if (context.user) {
@@ -53,10 +54,12 @@ const resolvers = {
           { new: true }
         );
       }
-      throw new AuthenticationError('You need to be logged in');
+      throw new ApolloError('You need to be logged in', 'UNAUTHENTICATED');
     },
   },
 };
 
 export default resolvers;
+
+
 

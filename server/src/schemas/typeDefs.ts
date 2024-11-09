@@ -1,6 +1,5 @@
-import { gql } from '@apollo/server';
-import { AuthenticationError } from '@apollo/server';
 
+import gql from 'graphql-tag';
 
 const typeDefs = gql`
   type User {
@@ -21,7 +20,7 @@ const typeDefs = gql`
   }
 
   type Auth {
-    token: ID!
+    token: ID
     user: User
   }
 
@@ -38,3 +37,4 @@ const typeDefs = gql`
 `;
 
 export default typeDefs;
+
