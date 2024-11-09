@@ -5,19 +5,23 @@
   "main": "dist/server.js",
   "type": "module",
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/server.js",
-    "watch": "nodemon dist/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
+    "client:build": "cd ../client && npm run build",
+    "server": "node dist/server.js",
+    "server:build": "tsc",
+    "start": "npm run client:build && npm run server",
+    "dev": "concurrently \"npm run server:build --watch\" \"cd ../client && npm start\""
+  }
+  
+   ,"keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^4.0.1",
+    "@apollo/server": "^4.11.2",
+    "bcryptjs": "^2.4.3",
     "brcypt": "^1.0.1",
     "express": "^4.19.2",
-    "jsonwebtoken": "^8.5.1",
+    "graphql": "^16.9.0",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.0"
   },
   "devDependencies": {
@@ -27,6 +31,6 @@
     "@types/node": "^20.14.8",
     "dotenv": "^16.4.5",
     "nodemon": "^3.1.0",
-    "typescript": "^5.4.5"
+    "typescript": "^5.6.3"
   }
 }
