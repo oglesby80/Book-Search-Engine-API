@@ -4,13 +4,12 @@ import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import { json } from 'body-parser';
 import dotenv from 'dotenv';
+import mongoose from 'mongoose'; // Import mongoose to access connection events
 import routes from './routes';
 import typeDefs from './schemas/typeDefs';
 import resolvers from './schemas/resolvers';
 import { authMiddleware } from './services/auth';
-import connection from '../config/connection.ts';
-
-
+import dbConnection from './config/connection'; // Make sure this file sets up the connection
 
 dotenv.config(); // Load environment variables
 
@@ -42,19 +41,22 @@ async function startApolloServer() {
   app.use(routes);
 
   // Connect to the database and start the server
-  db.once('open', () => {
+  dbConnection(); // Call the function that connects to MongoDB
+
+  // Use mongoose.connection to listen for 'open' and 'error' events
+  mongoose.connection.once('open', () => {
     app.listen(PORT, () => {
       console.log(`🌍 Server listening on http://localhost:${PORT}`);
       console.log(`🚀 GraphQL available at http://localhost:${PORT}/graphql`);
     });
   });
 
-  // Error handling for database connection issues
-  db.on('error', (err) => {
+  mongoose.connection.on('error', (err) => {
     console.error('Database connection error:', err);
   });
 }
 
 startApolloServer();
+
 
 
