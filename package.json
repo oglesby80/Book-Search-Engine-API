@@ -4,10 +4,10 @@
   "description": "",
   "main": "server/dist/server.js",
   "scripts": {
-    "start": "node server/dist/server.js",
+    "start":  "cd server && npm run start",
     "develop": "concurrently \"npm --prefix server run watch\" \"npm --prefix client run dev\"",
     "install": "npm install --prefix server && npm install --prefix client",
-    "build": "concurrently \"npm --prefix server run build\" \"npm --prefix client run build\"",
+    "build": "cd client && npm install && npm run build && cd ../server && npm install && npm run server:build",
     "render-build": "npm install && npm run build"
   },
   "keywords": [],
