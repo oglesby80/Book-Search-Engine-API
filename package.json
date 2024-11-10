@@ -4,8 +4,8 @@
   "description": "",
   "main": "server/dist/server.js",
   "scripts": {
-    "build": "concurrently \"cd server && npm install && npm run build\" \"cd client && npm install && npm run build\"",
-    "start": "npm run build && node server/dist/server.js"
+    "build": "npm run build",
+    "start": "npm run start"
   },
   "keywords": [],
   "author": "",
