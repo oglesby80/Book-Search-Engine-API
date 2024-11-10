@@ -1,18 +1,12 @@
 {
-  "extends": "../tsconfig.json",
   "compilerOptions": {
-    /* Modules */
-    "rootDir": "src",
-
-    /* Emit */
-    "outDir": "dist",
-
-    /* Type Checking */
-    "noEmitOnError": true /* Optional: only emit files if there are no errors */
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "target": "ES2020",
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist"],
-
-  /* Paths for Custom Type Definitions */
-  "typeRoots": ["./node_modules/@types", "./src/types"]
+  "include": ["src/**/*.ts", "src/config/**/*"]
 }
