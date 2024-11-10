@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "server/dist/server.js",
-  "scripts": {
-    "build": "npm run build",
-    "start": "npm run start"
-  },
-  "keywords": [],
+  
+    "scripts": {
+      "build": "cd server && npm install && npm run build && cd ../client && npm install && npm run build",
+      "start": "cd server && npm start"
+    }
+  
+  
+  ,"keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
