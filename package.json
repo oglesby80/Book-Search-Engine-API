@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "server/dist/server.js",
-  "scripts": {
-    "client:build": "cd client && npm run build",
-    "server:build": "cd server && npm run build",
-    "start": "npm run client:build && npm run server:start",
-    "dev": "concurrently \"npm run server:dev\" \"cd client && npm run dev\""
-}
+  
+    "scripts": {
+      "build": "concurrently \"cd server && npm install && npm run build\" \"cd client && npm install && npm run build\"",
+      "start": "cd server && npm run start"
+    }
  , "keywords": [],
   "author": "",
   "license": "ISC",
@@ -20,5 +19,6 @@
   },
   "dependencies": {
     "express": "^4.21.1"
+    ,"concurrently": "^8.2.2"
   }
 }
