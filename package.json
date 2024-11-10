@@ -11,8 +11,8 @@
     "render-build": "npm install && npm run build",
     "server:build": "cd server && tsc",
     "client:build": "cd client && npm run build"
-  }
-  ,"keywords": [],
+  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
