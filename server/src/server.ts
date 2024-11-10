@@ -4,11 +4,13 @@ import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import { json } from 'body-parser';
 import dotenv from 'dotenv';
-import db from './config/connection';
 import routes from './routes';
 import typeDefs from './schemas/typeDefs';
 import resolvers from './schemas/resolvers';
 import { authMiddleware } from './services/auth';
+import connection from '../config/connection.ts';
+
+
 
 dotenv.config(); // Load environment variables
 
