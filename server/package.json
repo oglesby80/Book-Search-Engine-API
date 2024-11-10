@@ -1,25 +1,36 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "Server side for Google Books App",
-  "type": "module",
+  "description": "",
   "main": "dist/server.js",
+  "type": "module",
   "scripts": {
-    "start": "node dist/server.js",
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts", 
-    "build": "tsc",
-    "watch": "tsc --watch"
+    "client:build": "cd ../client && npm run build",
+    "server": "node dist/server.js",
+    "server:build": "tsc",
+    "start": "npm run client:build && npm run server",
+    "dev": "concurrently \"npm run server:build --watch\" \"cd ../client && npm start\""
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "express": "^4.21.1",
-    "mongoose": "^6.5.3", 
-    "jsonwebtoken": "^9.0.0" 
+    "@apollo/server": "^4.11.2",
+    "bcryptjs": "^2.4.3",
+    "express": "^4.19.2",
+    "graphql": "^16.9.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.0.0",
+    "concurrently": "^7.2.0"
   },
   "devDependencies": {
-    "typescript": "^5.0.0",
-    "ts-node": "^10.0.0",
-    "ts-node-dev": "^2.0.0", 
-    "@types/express": "^4.17.15",
-    "@types/node": "^20.0.0"
+    "@types/bcrypt": "^5.0.2",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/node": "^20.14.8",
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.0",
+    "typescript": "^5.6.3"
   }
 }
+

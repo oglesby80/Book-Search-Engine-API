@@ -1,14 +1,13 @@
 {
   "name": "client",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",               
-    "start": "vite preview",       
-    "build": "vite build",        
-    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"      
+    "dev": "vite",
+    "start": "vite",                 
+    "build": "vite build",           
+    "preview": "vite preview"        
   },
   "dependencies": {
     "@apollo/client": "^3.11.9",
@@ -31,4 +30,5 @@
     "vite": "^5.1.6"
   }
 }
+
 
