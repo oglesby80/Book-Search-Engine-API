@@ -3,22 +3,22 @@
   "version": "1.0.0",
   "description": "",
   "main": "server/dist/server.js",
-  
-    "scripts": {
-      "build": "concurrently \"cd server && npm install && npm run build\" \"cd client && npm install && npm run build\"",
-      "start": "cd server && npm run start"
-    }
- , "keywords": [],
+  "scripts": {
+    "build": "concurrently \"cd server && npm install && npm run build\" \"cd client && npm install && npm run build\"",
+    "start": "npm run build && node server/dist/server.js"
+  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/dotenv": "^8.2.3",
-    "@types/jsonwebtoken": "^9.0.7"
-    ,"concurrently": "^8.2.2"
+    "@types/jsonwebtoken": "^9.0.7",
+    "concurrently": "^8.2.2"
   },
   "dependencies": {
-    "express": "^4.21.1"
-  
+    "express": "^4.21.1",
+    "apollo-server-express": "^3.6.7",
+    "graphql-tag": "^2.12.5" 
   }
 }
