@@ -5,9 +5,9 @@
   "main": "dist/server.js",
   "type": "module",
   "scripts": {
-    "build": "tsc && mkdir -p dist/config && cp -R src/config/* dist/config",
-    "start": "node dist/server.js",
-    "dev": "ts-node-dev --respawn src/server.ts"
+    "build": "tsc",
+    "postbuild": "cp -R src/config dist/config", 
+    "start": "node dist/server.js"
   },
   "keywords": [],
   "author": "",
