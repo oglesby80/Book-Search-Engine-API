@@ -9,8 +9,8 @@
     "postbuild": "cp -R src/config dist/config",
     "start": "node dist/server.js",
     "dev": "ts-node-dev --respawn src/server.ts"
-  }
-  ,"keywords": [],
+  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -21,7 +21,8 @@
     "graphql": "^16.9.0",
     "graphql-tag": "^2.12.6",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.0.0"
+    "mongoose": "^8.0.0",
+    "resolve": "^1.22.8"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
