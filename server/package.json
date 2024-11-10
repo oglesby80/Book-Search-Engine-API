@@ -4,10 +4,10 @@
   "description": "",
   "main": "dist/server.js",
   "type": "module",
-  "scripts": {
+   "scripts": {
     "build": "tsc && cp -R src/config dist/config",
-    "dev": "ts-node-dev --respawn src/server.ts",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "dev": "ts-node-dev --respawn src/server.ts"
   },
   "keywords": [],
   "author": "",
