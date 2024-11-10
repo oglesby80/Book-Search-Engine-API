@@ -4,8 +4,8 @@
   "description": "",
   "main": "dist/server.js",
   "type": "module",
-   "scripts": {
-    "build": "tsc && cp -R src/config dist/config",
+  "scripts": {
+    "build": "tsc && mkdir -p dist/config && cp -R src/config/* dist/config",
     "start": "node dist/server.js",
     "dev": "ts-node-dev --respawn src/server.ts"
   },

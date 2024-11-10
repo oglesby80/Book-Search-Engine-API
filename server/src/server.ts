@@ -9,6 +9,7 @@ import typeDefs from './schemas/typeDefs';
 import resolvers from './schemas/resolvers';
 import { authMiddleware } from './services/auth';
 
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
