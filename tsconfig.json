@@ -4,7 +4,7 @@
     "target": "ES2020",
 
     /* Modules */
-    "module": "commonjs",  // Change from "ESNext" to "commonjs"
+    "module": "ESNext",   // Change from "ESNext" to "commonjs"
     "moduleResolution": "node", // Ensure this is set to "node"
     "skipLibCheck": true,
 

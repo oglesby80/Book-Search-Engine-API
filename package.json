@@ -4,13 +4,12 @@
   "description": "",
   "main": "server/dist/server.js",
   "scripts": {
-    "start":  "cd server && npm run start",
-    "develop": "concurrently \"npm --prefix server run watch\" \"npm --prefix client run dev\"",
-    "install": "npm install --prefix server && npm install --prefix client",
-    "build": "cd client && npm install && npm run build && cd ../server && npm install && npm run server:build",
-    "render-build": "npm install && npm run build"
-  },
-  "keywords": [],
+    "client:build": "cd client && npm run build",
+    "server:build": "cd server && npm run build",
+    "start": "npm run client:build && npm run server:start",
+    "dev": "concurrently \"npm run server:dev\" \"cd client && npm run dev\""
+}
+ , "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
