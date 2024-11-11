@@ -5,12 +5,12 @@ import { expressMiddleware } from '@apollo/server/express4';
 import { json } from 'body-parser';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose'; // Import mongoose to access connection events
-import routes from './routes';
 import typeDefs from './schemas/typeDefs';
 import resolvers from './schemas/resolvers';
 import { authMiddleware } from './services/auth';
 import dbConnection from './config/connection'; // Make sure this file sets up the connection
-import { map } from 'rxjs/internal/operators/map.js';
+import routes from './routes/index';
+
 
 dotenv.config(); // Load environment variables
 
