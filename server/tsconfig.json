@@ -8,5 +8,5 @@
     "esModuleInterop": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "src/config/**/*", "src/schemas/typeDefs.js"]
+  "include": ["src/**/*.ts", "src/config/**/*", "src/schemas/typeDefs.ts", "src/schemas/resolvers.ts"]
 }
