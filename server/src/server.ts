@@ -5,7 +5,7 @@ import { expressMiddleware } from '@apollo/server/express4';
 import { json } from 'body-parser';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose'; // Import mongoose to access connection events
-import typeDefs from './schemas/typeDefs';
+import typeDefs from './schemas/typeDefs.js';
 import resolvers from './schemas/resolvers';
 import { authMiddleware } from './services/auth';
 import dbConnection from './config/connection'; // Make sure this file sets up the connection
