@@ -3,23 +3,23 @@ import path from 'node:path';
 import { fileURLToPath } from 'url';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
-import { json } from 'body-parser';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import typeDefs from './schemas/typeDefs';
-import resolvers from './schemas/resolvers';
-import { authMiddleware } from './services/auth';
-import dbConnection from './config/connection';
-import routes from './routes/index';
+import typeDefs from './schemas/typeDefs.js';
+import resolvers from './schemas/resolvers.js';
+import { authMiddleware } from './services/auth.js';
+import dbConnection from './config/connection.js';
+import routes from './routes/index.js';
 
-dotenv.config();
+dotenv.config(); // Load environment variables
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Fix for `__dirname` in ES Modules
+// Equivalent of __dirname in ES Modules
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// Initialize Apollo Server
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -28,21 +28,27 @@ const server = new ApolloServer({
 async function startApolloServer() {
   await server.start();
   
-  app.use('/graphql', json(), expressMiddleware(server, {
+  // Middleware for GraphQL with authentication context
+  app.use('/graphql', express.json(), expressMiddleware(server, {
     context: async ({ req }) => authMiddleware({ req }),
   }));
 
+  // Express middleware for parsing JSON and URL-encoded data
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
 
+  // Serve static assets in production
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/dist')));
   }
 
+  // Apply routes
   app.use(routes);
 
-  dbConnection();
+  // Connect to the database and start the server
+  dbConnection(); // Call the function that connects to MongoDB
 
+  // Use mongoose.connection to listen for 'open' and 'error' events
   mongoose.connection.once('open', () => {
     app.listen(PORT, () => {
       console.log(`🌍 Server listening on http://localhost:${PORT}`);
@@ -56,3 +62,4 @@ async function startApolloServer() {
 }
 
 startApolloServer();
+

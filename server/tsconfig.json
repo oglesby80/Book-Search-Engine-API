@@ -6,7 +6,8 @@
     "moduleResolution": "Node",
     "target": "ES2020",
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "src/config/**/*", "src/schemas/typeDefs.ts", "src/schemas/resolvers.ts"]
+  "include": ["src/**/*"]
 }
