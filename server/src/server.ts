@@ -61,3 +61,4 @@ async function startApolloServer() {
 
 
 
+startApolloServer();
