@@ -10,6 +10,7 @@ import typeDefs from './schemas/typeDefs';
 import resolvers from './schemas/resolvers';
 import { authMiddleware } from './services/auth';
 import dbConnection from './config/connection'; // Make sure this file sets up the connection
+import { map } from 'rxjs/internal/operators/map.js';
 
 dotenv.config(); // Load environment variables
 
