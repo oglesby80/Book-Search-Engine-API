@@ -5,9 +5,9 @@
   "main": "dist/server.js",
   "type": "module",
   "scripts": {
-    "build": "cd client && npm install && npm run build && mv dist ../server/client/dist",
-    "start": "cd server && npm start",
-    "postinstall": "npm run build"
+    "postinstall": "cd ../client && npm install && npm run build",
+    "start": "node dist/server.js",
+    "build": "tsc"
   }
   ,"keywords": [],
   "author": "",
