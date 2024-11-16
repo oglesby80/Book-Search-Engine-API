@@ -1,7 +1,7 @@
 import { ApolloError } from 'apollo-server-express'; // Updated import
-import User from '../models/User';
-import { signToken } from '../services/auth';
-import { JwtPayload } from '../services/auth';
+import User from '../models/User.js';
+import { signToken } from '../services/auth.js';
+import { JwtPayload } from '../services/auth.js';
 
 interface Context {
   user?: JwtPayload;
