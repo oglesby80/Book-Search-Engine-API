@@ -5,8 +5,8 @@
   "main": "dist/server.js",
   "type": "module",
   "scripts": {
-    "postinstall": "cd client && npm install && npm run build && mv dist ../server/client/dist",
-    "start": "node dist/server.ts",
+    "postinstall": "cd ../client && npm install && npm run build",
+    "start": "node dist/server.js",
     "build": "tsc"
   }
   ,"keywords": [],
