@@ -37,6 +37,9 @@ async function startApolloServer() {
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
 
+  console.log('Serving static files from:', path.join(__dirname, '../../client/build'));
+
+
   // Serve static assets in production
   if (process.env.NODE_ENV === 'production') {
     // Serve React static files
