@@ -45,7 +45,7 @@ async function startApolloServer() {
     // Serve React static files
     app.use(express.static(path.join(__dirname, '../client/build')));
 
-    app.use(express.static(buildPath));
+   
 
     // Serve index.html for non-API routes
     app.get('*', (req, res) => {
