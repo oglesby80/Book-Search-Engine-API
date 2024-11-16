@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node dist/server.js",
-    "build": "cd client && npm run build && cd ../server && npm run build",
+    "build": "tsc",
     "postinstall": "cd client && npm install && npm run build"
   }
   
