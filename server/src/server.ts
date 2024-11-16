@@ -27,30 +27,41 @@ const server = new ApolloServer({
 
 async function startApolloServer() {
   await server.start();
-  
+
   // Middleware for GraphQL with authentication context
-  app.use('/graphql', express.json(), expressMiddleware(server, {
-    context: async ({ req }) => authMiddleware({ req }),
-  }));
+  app.use(
+    '/graphql',
+    express.json(),
+    expressMiddleware(server, {
+      context: async ({ req }) => authMiddleware({ req }),
+    })
+  );
 
   // Express middleware for parsing JSON and URL-encoded data
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
 
-  console.log('Serving static files from:', path.join(__dirname, '../../client/build'));
+  // Debugging logs for static file paths
+  console.log('NODE_ENV:', process.env.NODE_ENV);
+  console.log('Serving static files from:', path.join(__dirname, '../../client/dist'));
 
-
+  // Serve static assets in production
   if (process.env.NODE_ENV === 'production') {
-    // Serve Vite's production build files
     const distPath = path.join(__dirname, '../../client/dist');
-    console.log('Serving static files from:', distPath);
-  
+
+    // Log the path being served
+    console.log('Production mode: Serving static files from:', distPath);
+
+    // Serve Vite's production build files
     app.use(express.static(distPath));
-  
+
     // Fallback route: Serve `index.html` for unmatched routes
     app.get('*', (req, res) => {
+      console.log('Fallback route: Serving index.html');
       res.sendFile(path.join(distPath, 'index.html'));
     });
+  } else {
+    console.log('Development mode: Static files are not being served.');
   }
 
   // Apply routes
@@ -73,5 +84,6 @@ async function startApolloServer() {
 }
 
 startApolloServer();
+
 
 
