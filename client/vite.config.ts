@@ -5,14 +5,18 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 3000,
-    open: true,
+    port: 3000, // The port for the Vite development server
+    open: true, // Automatically open the browser
     proxy: {
-      '/api': {
-        target: 'http://localhost:3001',
+      '/api': { // Proxy API requests to the backend
+        target: 'http://localhost:3002', // Update this to your backend port (3002 in your server config)
         secure: false,
-        changeOrigin: true
-      }
-    }
-  }
+        changeOrigin: true,
+      },
+    },
+  },
+  build: {
+    outDir: 'dist', // Default build directory
+  },
 })
+

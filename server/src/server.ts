@@ -49,15 +49,15 @@ async function startApolloServer() {
   if (process.env.NODE_ENV === 'production') {
     const distPath = path.join(__dirname, '../../client/dist');
 
-    // Log the path being served
-    console.log('Production mode: Serving static files from:', distPath);
+     // Log the path to verify correctness
+  console.log('Serving static files from:', distPath);
 
     // Serve Vite's production build files
     app.use(express.static(distPath));
 
     // Fallback route: Serve `index.html` for unmatched routes
     app.get('*', (req, res) => {
-      console.log('Fallback route: Serving index.html');
+      console.log('Serving fallback index.html');
       res.sendFile(path.join(distPath, 'index.html'));
     });
   } else {
