@@ -29,48 +29,36 @@ async function startApolloServer() {
   await server.start();
 
   // Middleware for GraphQL with authentication context
-  app.use(
-    '/graphql',
-    express.json(),
-    expressMiddleware(server, {
-      context: async ({ req }) => authMiddleware({ req }),
-    })
-  );
+  app.use('/graphql', express.json(), expressMiddleware(server, {
+    context: async ({ req }) => authMiddleware({ req }),
+  }));
 
   // Express middleware for parsing JSON and URL-encoded data
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
 
-  // Debugging logs for static file paths
-  console.log('NODE_ENV:', process.env.NODE_ENV);
-  console.log('Serving static files from:', path.join(__dirname, '../../client/dist'));
-
-  // Serve static assets in production
+  // Add this code block to serve static files in production
   if (process.env.NODE_ENV === 'production') {
+    // Path to the 'dist' folder where Vite builds the production files
     const distPath = path.join(__dirname, '../../client/dist');
+    console.log('Serving static files from:', distPath);
 
-     // Log the path to verify correctness
-  console.log('Serving static files from:', distPath);
-
-    // Serve Vite's production build files
+    // Serve static files from the Vite 'dist' folder
     app.use(express.static(distPath));
 
-    // Fallback route: Serve `index.html` for unmatched routes
+    // Fallback route: Serve `index.html` for all unmatched routes
     app.get('*', (req, res) => {
-      console.log('Serving fallback index.html');
+      console.log('Serving index.html');
       res.sendFile(path.join(distPath, 'index.html'));
     });
-  } else {
-    console.log('Development mode: Static files are not being served.');
   }
 
-  // Apply routes
+  // Apply routes for APIs
   app.use(routes);
 
   // Connect to the database and start the server
-  dbConnection(); // Call the function that connects to MongoDB
+  dbConnection();
 
-  // Use mongoose.connection to listen for 'open' and 'error' events
   mongoose.connection.once('open', () => {
     app.listen(PORT, () => {
       console.log(`🌍 Server listening on http://localhost:${PORT}`);
@@ -84,6 +72,8 @@ async function startApolloServer() {
 }
 
 startApolloServer();
+
+
 
 
 
