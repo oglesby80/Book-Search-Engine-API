@@ -40,16 +40,17 @@ async function startApolloServer() {
   console.log('Serving static files from:', path.join(__dirname, '../../client/build'));
 
 
-  // Serve static assets in production
   if (process.env.NODE_ENV === 'production') {
+    // Define buildPath
+    const buildPath = path.join(__dirname, '../../client/build');
+    console.log('Serving static files from:', buildPath);
+  
     // Serve React static files
-    app.use(express.static(path.join(__dirname, '../client/build')));
-
-   
-
-    // Serve index.html for non-API routes
+    app.use(express.static(buildPath));
+  
+    // Fallback route: Serve `index.html` for unmatched routes
     app.get('*', (req, res) => {
-      res.sendFile(path.join(__dirname, '../client/build/index.html'));
+      res.sendFile(path.join(buildPath, 'index.html'));
     });
   }
 
