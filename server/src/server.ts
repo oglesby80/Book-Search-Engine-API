@@ -48,8 +48,14 @@ async function startApolloServer() {
 
     // Fallback route: Serve `index.html` for all unmatched routes
     app.get('*', (req, res) => {
-      console.log('Serving index.html');
-      res.sendFile(path.join(distPath, 'index.html'));
+      const indexPath = path.join(distPath, 'index.html');
+      console.log('Trying to serve:', indexPath);
+      res.sendFile(indexPath, (err) => {
+        if (err) {
+          console.error('Error serving index.html:', err);
+          res.status(500).send('Error serving the React app.');
+        }
+      });
     });
   }
 
@@ -72,6 +78,7 @@ async function startApolloServer() {
 }
 
 startApolloServer();
+
 
 
 
