@@ -10,6 +10,7 @@ import resolvers from './schemas/resolvers.js';
 import { authMiddleware } from './services/auth.js';
 import dbConnection from './config/connection.js';
 import routes from './routes/index.js';
+import fs from 'fs';
 
 dotenv.config(); // Load environment variables
 
@@ -57,7 +58,19 @@ async function startApolloServer() {
                 }
             });
         });
-    }
+    app.get('/debug-path', (req, res) => {
+        const distPath = path.join(__dirname, '../../client/dist');
+        fs.readdir(distPath, (err, files) => {
+            if (err) {
+                console.error('Error reading dist directory:', err);
+                return res.status(500).send('Error reading dist directory');
+            }
+            res.json({ distPath, files });
+        });
+    });
+}
+
+    
 
     // Apply routes
     app.use(routes);
