@@ -39,7 +39,13 @@ async function startApolloServer() {
 
   // Serve static assets in production
   if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/dist')));
+    // Serve React static files
+    app.use(express.static(path.join(__dirname, '../client/build')));
+
+    // Serve index.html for non-API routes
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, '../client/build/index.html'));
+    });
   }
 
   // Apply routes
@@ -62,4 +68,5 @@ async function startApolloServer() {
 }
 
 startApolloServer();
+
 
