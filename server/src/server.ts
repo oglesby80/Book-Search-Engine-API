@@ -40,7 +40,7 @@ async function startApolloServer() {
 
   // Serve static files in production
   if (process.env.NODE_ENV === 'production') {
-    const distPath = path.join(__dirname, '../../client/dist');
+    const distPath = path.resolve(__dirname, '../../client/dist');
     console.log('Serving static files from:', distPath);
 
     // Ensure the `dist` folder exists
