@@ -5,7 +5,7 @@
   "main": "server/dist/server.js",
   
     "scripts": {
-      "build": "cd server && npm install && npm run build && cd ../client && npm install && npm run build",
+      "build":  "cd server && npm run build && cd ../client && npm run build",
       "start": "cd server && npm start"
     }
   

@@ -5,10 +5,9 @@
   "main": "dist/server.js",
   "type": "module"
   ,"scripts": {
-    "start": "node server/dist/server.js",
-    "build": "tsc",
-    "build:client": "cd client && npm install && npm run build",
-    "build:server": "cd server && npm install && tsc"
+    "start": "node dist/server.js",
+    "build": "tsc"
+   
 }
   
   
