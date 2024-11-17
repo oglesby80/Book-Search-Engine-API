@@ -7,12 +7,12 @@
     "build": "vite build",
     "start": "vite preview",
     "dev": "vite"
-}
-
-
-  ,"dependencies": {
+  },
+  "dependencies": {
     "@apollo/client": "^3.11.9",
+    "@emotion/react": "^11.13.3",
     "bootstrap": "^5.2.3",
+    "express": "^4.21.1",
     "graphql": "^16.9.0",
     "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
@@ -21,7 +21,7 @@
     "react-router-dom": "^6.11.2"
   },
   "devDependencies": {
-    "@types/react": "^18.0.28",
+    "@types/react": "^18.3.12",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8.38.0",
@@ -31,5 +31,3 @@
     "vite": "^5.1.6"
   }
 }
-
-
