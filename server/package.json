@@ -5,10 +5,11 @@
   "main": "dist/server.js",
   "type": "module"
   ,"scripts": {
-    "postinstall": "cd ../client && npm install && npm run build",
-    "start": "node dist/server.js",
-    "build": "tsc"
-  }
+    "start": "node server/dist/server.js",
+    "build": "npm install && npm run build:client && npm run build:server",
+    "build:client": "cd client && npm install && npm run build",
+    "build:server": "cd server && npm install && tsc"
+}
   
   
   ,"keywords": [],
