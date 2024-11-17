@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/server.js",
-  "type": "module",
-  "scripts": {
-    "start": "node server/server.js",
+  "type": "module","scripts": {
+    "start": "cd server && node dist/server.js",
     "start:dev": "concurrently \"cd server && npm run watch\" \"wait-on tcp:3001 && cd client && npm run dev\"",
     "server": "cd server && npm start",
     "server:dev": "cd server && npm run dev",
@@ -13,11 +12,12 @@
     "client:build": "cd client && npm run build",
     "client:dev": "cd client && npm run dev",
     "seed": "cd server && npm run seed",
-    "build": "concurrently \"cd server && npm run build\" \"cd client && npm run build\"",
-    "render-build": "npm install && npm run build"
-  },
+    "build": "cd client && npm install && npm run build && cd ../server && npm install && npm run build",
+    "render-build": "cd client && npm install && npm run build && cd ../server && npm install && npm run build"
+  }
   
-  "keywords": [],
+  
+  ,"keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
