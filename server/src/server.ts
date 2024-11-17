@@ -1,7 +1,6 @@
 import express from 'express';
 import path from 'node:path';
 import { fileURLToPath } from 'url';
-import fs from 'fs';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import dotenv from 'dotenv';
@@ -11,6 +10,7 @@ import resolvers from './schemas/resolvers.js';
 import { authMiddleware } from './services/auth.js';
 import dbConnection from './config/connection.js';
 import routes from './routes/index.js';
+import fs from 'fs';
 
 dotenv.config(); // Load environment variables
 
@@ -38,45 +38,31 @@ async function startApolloServer() {
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
 
-  // Debug route to verify the directory structure on the server
-  app.get('/debug-path', (req, res) => {
-    const distPath = path.join(__dirname, '../../client/dist');
-    console.log('Debugging distPath:', distPath);
-
-    fs.readdir(distPath, (err, files) => {
-      if (err) {
-        console.error('Error reading dist directory:', err);
-        return res.status(500).send('Error reading dist directory');
-      }
-      res.json({ path: distPath, files });
-    });
-  });
-
   // Serve static files in production
   if (process.env.NODE_ENV === 'production') {
     const distPath = path.join(__dirname, '../../client/dist');
     console.log('Serving static files from:', distPath);
 
-    // Check if the dist folder exists
-    if (!fs.existsSync(distPath)) {
-      console.error('Dist folder does not exist:', distPath);
-    } else {
-      console.log('Dist folder exists.');
-    }
+    // Ensure the `dist` folder exists
+    if (fs.existsSync(distPath)) {
+      // Serve the static files
+      app.use(express.static(distPath));
 
-    // Serve the static files
-    app.use(express.static(distPath));
+      // Debugging route to inspect the `dist` folder contents
+      app.get('/debug-path', (req, res) => {
+        fs.readdir(distPath, (err, files) => {
+          if (err) {
+            console.error('Error reading dist directory:', err);
+            return res.status(500).send('Error reading dist directory');
+          }
+          res.json({ path: distPath, files });
+        });
+      });
 
-    // Fallback route to serve `index.html`
-    app.get('*', (req, res) => {
-      const indexPath = path.join(distPath, 'index.html');
-      console.log('Trying to serve:', indexPath);
-
-      fs.access(indexPath, fs.constants.F_OK, (err) => {
-        if (err) {
-          console.error('index.html does not exist:', err);
-          return res.status(500).send('index.html not found');
-        }
+      // Fallback route to serve `index.html`
+      app.get('*', (req, res) => {
+        const indexPath = path.join(distPath, 'index.html');
+        console.log('Trying to serve:', indexPath);
 
         res.sendFile(indexPath, (err) => {
           if (err) {
@@ -85,7 +71,12 @@ async function startApolloServer() {
           }
         });
       });
-    });
+    } else {
+      console.error('Dist folder not found. Ensure the client is built properly.');
+      app.get('*', (req, res) => {
+        res.status(500).send('Dist folder not found. Build the client before deploying.');
+      });
+    }
   }
 
   // Apply routes
@@ -107,6 +98,7 @@ async function startApolloServer() {
 }
 
 startApolloServer();
+
 
 
 
